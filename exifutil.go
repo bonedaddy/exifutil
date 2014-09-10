@@ -112,3 +112,32 @@ func Flip(im image.Image, dir FlipDirection) image.Image {
 	}
 	return im
 }
+
+func ProcessOrientation(orientation int64) (angle int, flipMode FlipDirection, switchDimensions bool) {
+	switch orientation {
+	case TopLeftSide:
+		// do nothing
+	case TopRightSide:
+		flipMode = 2
+	case BottomRightSide:
+		angle = 180
+	case BottomLeftSide:
+		angle = 180
+		flipMode = 2
+	case LeftSideTop:
+		angle = -90
+		flipMode = 2
+		switchDimensions = true
+	case RightSideTop:
+		angle = -90
+		switchDimensions = true
+	case RightSideBottom:
+		angle = 90
+		flipMode = 2
+		switchDimensions = true
+	case LeftSideBottom:
+		angle = 90
+		switchDimensions = true
+	}
+	return
+}
